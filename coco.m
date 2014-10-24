@@ -55,9 +55,9 @@ if nargin < 5
 end
 
 
-for i = k:8:80
+for i = 1::80
   % Record a log of the training and test procedure
-  cls = categories(i, :)
+  cls = strtrim(categories(i, :))
   diary(conf.training.log([cls '-' timestamp]));
 
   % Train a model (and record how long it took)
