@@ -1,4 +1,4 @@
-function coco(n, k, note, dotrainval, testyear)
+function coco()
 % Train and evaluate a model. 
 %   pascal(n, note, dotrainval, testyear)
 %
@@ -26,36 +26,37 @@ function coco(n, k, note, dotrainval, testyear)
 % your project.
 % -------------------------------------------------------
 
-startup;
+for i = 1:80
+  n = 5
+  startup;
 
-conf = voc_config();
-cachedir = conf.paths.model_dir;
-testset = conf.eval.test_set;
-load('categories.mat')
+  conf = voc_config();
+  cachedir = conf.paths.model_dir;
+  testset = conf.eval.test_set;
+  load('categories.mat')
 
-% TODO: should save entire code used for this run
-% Take the code, zip it into an archive named by date
-% print the name of the code archive to the log file
-% add the code name to the training note
-timestamp = datestr(datevec(now()), 'dd.mmm.yyyy:HH.MM.SS');
+  % TODO: should save entire code used for this run
+  % Take the code, zip it into an archive named by date
+  % print the name of the code archive to the log file
+  % add the code name to the training note
+  timestamp = datestr(datevec(now()), 'dd.mmm.yyyy:HH.MM.SS');
 
-% Set the note to the training time if none is given
-if nargin < 3
-  note = timestamp;
-end
+  % Set the note to the training time if none is given
+  if nargin < 3
+    note = timestamp;
+  end
 
-% Don't evaluate trainval by default
-if nargin < 4
-  dotrainval = false;
-end
+  % Don't evaluate trainval by default
+  if nargin < 4
+    dotrainval = false;
+  end
 
-if nargin < 5
-  % which year to test on -- a string, e.g., '2007'.
-  testyear = conf.pascal.year;
-end
+  if nargin < 5
+    % which year to test on -- a string, e.g., '2007'.
+    testyear = conf.pascal.year;
+  end
 
 
-for i = 1::80
   % Record a log of the training and test procedure
   cls = strtrim(categories(i, :))
   diary(conf.training.log([cls '-' timestamp]));
@@ -90,4 +91,5 @@ for i = 1::80
   if dotrainval
     trainval(cls);
   end
+clear all;
 end
