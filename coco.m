@@ -27,7 +27,7 @@ function coco()
 % -------------------------------------------------------
 
 for i = 1:80
-  n = 5
+  n = 5;
   startup;
 
   conf = voc_config();
@@ -58,7 +58,7 @@ for i = 1:80
 
 
   % Record a log of the training and test procedure
-  cls = strtrim(categories(i, :))
+  cls = strtrim(categories(i, :));
   diary(conf.training.log([cls '-' timestamp]));
 
   % Train a model (and record how long it took)
