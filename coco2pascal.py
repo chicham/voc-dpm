@@ -96,7 +96,7 @@ def create_annotations(dbpath, subset, dst):
         if img.ndim == 3:
             out_name = rename(name)
             annotation = root('VOC2014', '{}.jpg'.format(out_name), 
-                              group[0]['height'], group[0]['width'])
+                              width=group[0]['width'], height=group[0]['height'])
             for instance in group:
                 annotation.append(instance_to_xml(instance))
             etree.ElementTree(annotation).write(dst / '{}.xml'.format(out_name))
