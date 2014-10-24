@@ -3,3 +3,7 @@ learn
 svm_mex601
 .nfs*
 cachedir
+voc_config.m
+GPATH
+GRTAGS
+GTAGS
