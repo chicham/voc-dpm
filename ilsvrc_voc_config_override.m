@@ -1,4 +1,4 @@
-function conf = sample_voc_config_override()
+function conf = ilsvrc_voc_config_override()
 % Sample config override file
 %
 % To use this execute:
@@ -17,7 +17,7 @@ function conf = sample_voc_config_override()
 % your project.
 % -------------------------------------------------------
 
-PASCAL_YEAR = '2014'
+PASCAL_YEAR = '2014';
 
 conf.project    = 'cvpr_2015_ilsvrc_xp';
 conf = cv(conf, 'training.train_set_fg', 'train');

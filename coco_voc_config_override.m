@@ -1,4 +1,4 @@
-function conf = sample_voc_config_override()
+function conf = coco_voc_config_override()
 % Sample config override file
 %
 % To use this execute:
