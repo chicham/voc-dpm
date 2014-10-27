@@ -1,4 +1,4 @@
-function coco()
+function coco(n, start, stop)
 % Train and evaluate a model. 
 %   pascal(n, note, dotrainval, testyear)
 %
@@ -26,14 +26,14 @@ function coco()
 % your project.
 % -------------------------------------------------------
 
-for i = 1:80
-  n = 5;
-  startup;
+startup;
+cachedir = conf.paths.model_dir;
+testset = conf.eval.test_set;
+load('categories.mat')
 
-  conf = voc_config();
-  cachedir = conf.paths.model_dir;
-  testset = conf.eval.test_set;
-  load('categories.mat')
+for i = start:stop
+
+conf = voc_config();
 
   % TODO: should save entire code used for this run
   % Take the code, zip it into an archive named by date
@@ -91,5 +91,4 @@ for i = 1:80
   if dotrainval
     trainval(cls);
   end
-clear all;
 end
