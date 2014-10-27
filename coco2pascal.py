@@ -79,21 +79,14 @@ def mass_rename(src):
 
 
 @baker.command
-def create_imageset(annotations, dst):
-    annotations = path(annotations).expand()
-    dst = path(dst).expand()
-    val_txt = dst / 'val.txt'
-    train_txt = dst / 'train.txt'
-
-    for annotation in annotations.listdir('*.xml'):
-        dst.write_text('{}\n'.format(annotation.name()), append=True)
-
-@baker.command
-def create_annotations(dbpath, subset, dst):
+def create_data(dbpath, subset, devkit, year=2015):
     annotations_path = path(dbpath).expand() / 'annotations/instances_{}2014.json'.format(subset)
     images_path = path(dbpath).expand() / 'images/{}2014'.format(subset)
     categories , instances= get_instances(annotations_path)
-    dst = path(dst).expand()
+    devkit = path(devkit).expand()
+
+    annotations_dst = devkit / 'VOC{}/Annotations'.format(year)
+    imagesets_dst = devkit / 'VOC{}/ImageSets/Main'.format(year)
 
     for i, instance in enumerate(instances):
         instances[i]['category_id'] = categories[instance['category_id']]
@@ -106,7 +99,8 @@ def create_annotations(dbpath, subset, dst):
                               width=group[0]['width'], height=group[0]['height'])
             for instance in group:
                 annotation.append(instance_to_xml(instance))
-            etree.ElementTree(annotation).write(dst / '{}.xml'.format(out_name))
+            etree.ElementTree(annotation).write(annotations_dst / '{}.xml'.format(out_name))
+            imagesets_dst.write_text('{}\n'.format(out_name), append=True)
             print out_name
         else:
             print instance['file_name']
