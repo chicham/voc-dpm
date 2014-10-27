@@ -17,13 +17,13 @@ function conf = ilsvrc_voc_config_override()
 % your project.
 % -------------------------------------------------------
 
-PASCAL_YEAR = '2014';
 
+conf.pascal.year = 2014;
 conf.project    = 'cvpr_2015_ilsvrc_xp';
-conf = cv(conf, 'training.train_set_fg', 'train');
-conf = cv(conf, 'training.train_set_bg', 'train');
-conf = cv(conf, 'training.cache_byte_limit', 10*2^30);
-conf = cv(conf, 'training.cache_example_limit', 100000);
-conf = cv(conf, 'training.num_negatives_small', 2000);
-conf = cv(conf, 'training.num_negatives_large', 20000);
-conf = cv(conf, 'eval.test_set', 'val');
+conf.training.train_set_fg = 'train';
+conf.training.train_set_bg = 'train';
+conf.training.cache_byte_limit = 10*2^30;
+conf.training.cache_example_limit = 100000;
+conf.training.num_negatives_small = 2000;
+conf.training.num_negatives_large = 20000;
+conf.eval.test_set = 'val';
