@@ -1,5 +1,4 @@
 function eval_model(cls, model)
-startup;
 
 conf = voc_config();
 testset = conf.eval.test_set;
