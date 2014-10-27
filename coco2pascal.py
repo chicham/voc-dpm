@@ -86,7 +86,7 @@ def create_data(dbpath, subset, devkit, year=2015):
     devkit = path(devkit).expand()
 
     annotations_dst = devkit / 'VOC{}/Annotations'.format(year)
-    imagesets_dst = devkit / 'VOC{}/ImageSets/Main'.format(year)
+    imagesets_dst = devkit / 'VOC{}/ImageSets/Main/{}.txt'.format(year, subset)
 
     for i, instance in enumerate(instances):
         instances[i]['category_id'] = categories[instance['category_id']]
