@@ -9,6 +9,7 @@ from collections import deque
 from lxml import etree, objectify
 from scipy.io import savemat
 from scipy.ndimage import imread
+from sh import mv
 
 
 def keyjoin(leftkey, leftseq, rightkey, rightseq):
@@ -63,9 +64,18 @@ def get_instances(coco_annotation):
 
 def rename(name, year=2014):
         out_name = path(name).stripext()
-        # out_name = out_name.split('_')[-1]
-        # out_name = '{}_{}'.format(year, out_name)
+        out_name = out_name.split('_')[-1]
+        out_name = '{}_{}'.format(year, out_name)
         return out_name
+
+
+@baker.command
+def mass_rename(src):
+    files = path(src).expand().listdir('*.jpg')
+
+    for f in files:
+        print f
+        mv(f, '{}{}'.format(f.dirname() / rename(f), f.ext))
 
 
 @baker.command
