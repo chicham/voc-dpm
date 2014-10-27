@@ -85,11 +85,8 @@ def create_imageset(annotations, dst):
     val_txt = dst / 'val.txt'
     train_txt = dst / 'train.txt'
 
-    for val in annotations.listdir('*val*'):
-        val_txt.write_text('{}\n'.format(val.basename().stripext()), append=True)
-
-    for train in annotations.listdir('*train*'):
-        train_txt.write_text('{}\n'.format(train.basename().stripext()), append=True)
+    for annotation in annotations.listdir('*.xml'):
+        dst.write_text('{}\n'.format(annotation.name()), append=True)
 
 @baker.command
 def create_annotations(dbpath, subset, dst):

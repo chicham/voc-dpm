@@ -1,7 +1,7 @@
 function hash = xVOChash_init(strs)
 % From the PASCAL VOC 2011 devkit
 
-hsize=4999;
+hsize=100000;
 hash.key=cell(hsize,1);
 hash.val=cell(hsize,1);
 
