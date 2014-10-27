@@ -1,5 +1,7 @@
 function eval_models(path)
 
+global VOC_CONFIG_OVERRIDE
+VOC_CONFIG_OVERRIDE=ilsvrc_voc_config_override()
 load('categories.mat')
 
 for i=1:80
