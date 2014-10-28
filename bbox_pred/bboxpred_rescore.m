@@ -1,4 +1,4 @@
-function [ap, newap] = bboxpred_rescore(name, testset, year, suffix, method)
+function [ap, newap] = bboxpred_rescore(name, testset, year, suffix, method, model)
 % Apply bounding box prediction to detections from a test dataset.
 %   [ap, newap] = bboxpred_rescore(name, testset, year, method)
 %
@@ -33,7 +33,11 @@ if nargin < 5
 end
 
 % Get or train the bbox predictor
-load([conf.paths.model_dir name '_final']);
+
+if nargin < 6
+  load([conf.paths.model_dir name '_final']);
+end
+
 if ~isfield(model, 'bboxpred')
   model = bboxpred_train(name, method);
 end
