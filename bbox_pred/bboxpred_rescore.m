@@ -32,12 +32,12 @@ if nargin < 5
   method = 'default';
 end
 
-% Get or train the bbox predictor
 
 if nargin < 6
   load([conf.paths.model_dir name '_final']);
 end
 
+% Get or train the bbox predictor
 if ~isfield(model, 'bboxpred')
   model = bboxpred_train(name, method);
 end

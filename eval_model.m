@@ -14,7 +14,7 @@ ap1 = pascal_eval(cls, ds, testset, testyear, suffix);
 fprintf('AP = %.4f (without bounding box prediction)\n', ap1)
 
 % Recompute AP after applying bounding box prediction
-[ap1, ap2] = bboxpred_rescore(cls, testset, testyear, suffix, model);
+[ap1, ap2] = bboxpred_rescore(cls, testset, testyear, suffix,'default',model);
 fprintf('AP = %.4f (without bounding box prediction)\n', ap1)
 fprintf('AP = %.4f (with bounding box prediction)\n', ap2)
 
