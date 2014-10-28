@@ -1,4 +1,4 @@
-function coco(n, start, stop, note, dotrainval, testyear)
+function coco(n, start, stop)
 % Train and evaluate a model. 
 %   pascal(n, note, dotrainval, testyear)
 %
@@ -45,19 +45,12 @@ conf = voc_config();
   timestamp = datestr(datevec(now()), 'dd.mmm.yyyy:HH.MM.SS');
 
   % Set the note to the training time if none is given
-  if nargin < 3
-    note = timestamp;
-  end
+  note = timestamp;
 
   % Don't evaluate trainval by default
-  if nargin < 4
-    dotrainval = false;
-  end
+  dotrainval = false;
 
-  if nargin < 5
-    % which year to test on -- a string, e.g., '2007'.
-    testyear = conf.pascal.year;
-  end
+  testyear = conf.pascal.year;
 
 
   % Record a log of the training and test procedure
