@@ -1,4 +1,4 @@
-function coco(n, start, stop, note, dotrainval, testyear))
+function coco(n, start, stop, note, dotrainval, testyear)
 % Train and evaluate a model. 
 %   pascal(n, note, dotrainval, testyear)
 %
