@@ -1,4 +1,4 @@
-function coco(n, start, stop)
+function coco(n, start, stop, note, dotrainval, testyear))
 % Train and evaluate a model. 
 %   pascal(n, note, dotrainval, testyear)
 %
@@ -27,6 +27,7 @@ function coco(n, start, stop)
 % -------------------------------------------------------
 
 startup;
+conf = voc_config();
 cachedir = conf.paths.model_dir;
 testset = conf.eval.test_set;
 load('categories.mat')
