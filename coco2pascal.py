@@ -106,8 +106,5 @@ def create_data(dbpath, subset, devkit, year=2015):
             print instance['file_name']
 
 
-
-
-
 if __name__ == '__main__':
     baker.run()

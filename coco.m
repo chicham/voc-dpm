@@ -36,7 +36,7 @@ VOC_CONFIG_OVERRIDE = @coco_voc_config_override;
 
 for i = start:stop
 
-conf = voc_config();
+  conf = voc_config();
 
   % TODO: should save entire code used for this run
   % Take the code, zip it into an archive named by date
