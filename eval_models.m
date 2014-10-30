@@ -4,7 +4,7 @@ startup;
 global VOC_CONFIG_OVERRIDE;
 VOC_CONFIG_OVERRIDE=@ilsvrc_voc_config_override;
 load('categories.mat');
-conf = voc_conf()
+conf = voc_config()
 
 for i=1:80
   cls = strtrim(categories(i, :));
