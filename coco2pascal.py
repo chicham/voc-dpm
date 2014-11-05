@@ -1,7 +1,7 @@
 import baker
 import json
 from path import path
-from cytoolz import merge, join, groupby
+from cytoolz import merge, join, groupby, pluck
 from cytoolz.compatibility import iteritems
 from cytoolz.curried import update_in
 from itertools import starmap
@@ -104,6 +104,23 @@ def create_data(dbpath, subset, devkit, year=2015):
             print out_name
         else:
             print instance['file_name']
+
+
+@baker.command
+def category_set(category, dbpath, subset='train', year='2014'):
+    dbpath = path(dbpath).expand()
+    dst = dbpath / 'VOC{year}/ImageSets/Main/{category}.txt'.format(year=yeas, category=category)
+    annotations = dbpath / 'VOC{year}/Annotations'
+    template = '{filename} {present}'
+
+    for anno in annotations.listdir('*.xml'):
+        filename = path(anno).stripext()
+        if category in set(pluck('name', anno['object'])):
+            dst.write_text(template.format(filename=filename, present=1), append=True)
+        else:
+            dst.write_text(template.format(filename=filename, present=-1), append=True)
+
+
 
 
 if __name__ == '__main__':
