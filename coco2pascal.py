@@ -112,7 +112,7 @@ def category_set(category, dbpath, year='2014'):
     dst = dbpath / 'VOC{year}/ImageSets/Main/{category}_{subset}.txt'
     annotations = dbpath / 'VOC{year}/Annotations/{filename}.xml'
     imageset = dbpath / 'VOC{year}/ImageSets/Main/{subset}.txt'
-    template = '{filename} {present}'
+    template = '{filename} {present}\n'
 
     def f(imageset, annotations, year, dst, template, subset, category):
         imageset = path(imageset.format(year=year, subset=subset))
