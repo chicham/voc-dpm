@@ -107,21 +107,26 @@ def create_data(dbpath, subset, devkit, year=2015):
 
 
 @baker.command
-def category_set(category, dbpath, subset='train', year='2014'):
+def category_set(category, dbpath, year='2014'):
     dbpath = path(dbpath).expand()
-    dst = dbpath / 'VOC{year}/ImageSets/Main/{category}.txt'.format(year=yeas, category=category)
-    annotations = dbpath / 'VOC{year}/Annotations'
+    dst = dbpath / 'VOC{year}/ImageSets/Main/{category}_{subset}.txt'.format(year=year, category=category, subset=subset)
+    annotations = dbpath / 'VOC{year}/Annotations/{filename}.xml'
+    imageset = dbpath / 'VOC{year}/ImageSets/Main/{subset}.txt'
     template = '{filename} {present}'
 
-    for anno in annotations.listdir('*.xml'):
-        filename = path(anno).stripext()
-        if category in set(pluck('name', anno['object'])):
-            present = 1
-        else:
-            present = 1
+    def f(imageset, annotations, year, dst, template):
+        for name in imageset:
+            anno = objectify.fromstring(path(annotations.format(year=year, filename=name)).text())
+            if category in set(pluck('name', anno['object'])):
+                present = 1
+            else:
+                present = -1
 
-        dst.write_text(template.format(filename=filename, present=present), append=True)
-        print template.format(filename=filename, present=present)
+            dst.write_text(template.format(filename=name, present=present), append=True)
+            print template.format(filename=name, present=present)
+
+    f(imageset.format(year=2014, subset='val'), annotations, year, dst.format(category=category, subset='val'), template)
+    f(imageset.format(year=2014, subset='train'), annotations, year, dst.format(category=category, subset='train'), template)
 
 
 
