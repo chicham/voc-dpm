@@ -114,7 +114,9 @@ def category_set(category, dbpath, year='2014'):
     imageset = dbpath / 'VOC{year}/ImageSets/Main/{subset}.txt'
     template = '{filename} {present}'
 
-    def f(imageset, annotations, year, dst, template):
+    def f(imageset, annotations, year, dst, template, subset, category):
+        imageset = imageset.format(year=year, subset=subset)
+        dst = dst.format(year=year, category=category, subset=subset)
         for name in imageset:
             anno = objectify.fromstring(path(annotations.format(year=year, filename=name)).text())
             if category in set(pluck('name', anno['object'])):
@@ -125,8 +127,8 @@ def category_set(category, dbpath, year='2014'):
             dst.write_text(template.format(filename=name, present=present), append=True)
             print template.format(filename=name, present=present)
 
-    f(imageset.format(year=2014, subset='val'), annotations, year, dst.format(category=category, subset='val'), template)
-    f(imageset.format(year=2014, subset='train'), annotations, year, dst.format(category=category, subset='train'), template)
+    f(imageset, annotations, year, dst, template, 'train', category)
+    f(imageset, annotations, year, dst, template, 'val', category)
 
 
 
