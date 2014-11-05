@@ -133,6 +133,16 @@ def category_set(category, dbpath, year='2014'):
     f(imageset, annotations, year, dst, template, 'val', category)
 
 
+@baker.command
+def all_sets(vocdevkit, dbpath, year='2014'):
+    dbpath = path(dbpath).expand()
+    vocdevkit = path(vocdevkit).expand()
+    annotations = dbpath / 'annotations/instances_{}2014.json'.format('train')
+    content = json.loads(annotations.text())
+    categories = pluck('name', content['categories'])
+
+    for category in categories:
+        category_set(category, vocdevkit, year)
 
 
 if __name__ == '__main__':
