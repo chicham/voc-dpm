@@ -117,6 +117,8 @@ def category_set(category, dbpath, year='2014'):
     def f(imageset, annotations, year, dst, template, subset, category):
         imageset = path(imageset.format(year=year, subset=subset))
         dst = path(dst.format(year=year, category=category, subset=subset))
+        if dst.exists():
+            dst.write_text('')
         for name in imageset.lines(retain=False):
             anno = objectify.fromstring(path(annotations.format(year=year, filename=name)).text())
             if category in set(pluck('name', anno['object'])):
