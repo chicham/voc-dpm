@@ -116,9 +116,12 @@ def category_set(category, dbpath, subset='train', year='2014'):
     for anno in annotations.listdir('*.xml'):
         filename = path(anno).stripext()
         if category in set(pluck('name', anno['object'])):
-            dst.write_text(template.format(filename=filename, present=1), append=True)
+            present = 1
         else:
-            dst.write_text(template.format(filename=filename, present=-1), append=True)
+            present = 1
+
+        dst.write_text(template.format(filename=filename, present=present), append=True)
+        print template.format(filename=filename, present=present)
 
 
 
