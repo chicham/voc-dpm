@@ -107,11 +107,11 @@ def create_data(dbpath, subset, devkit, year=2015):
 
 
 @baker.command
-def category_set(category, dbpath, year='2014'):
-    dbpath = path(dbpath).expand()
-    dst = dbpath / 'VOC{year}/ImageSets/Main/{category}_{subset}.txt'
-    annotations = dbpath / 'VOC{year}/Annotations/{filename}.xml'
-    imageset = dbpath / 'VOC{year}/ImageSets/Main/{subset}.txt'
+def category_set(category, vocdevkit, year='2014'):
+    vocdevkit = path(vocdevkit).expand()
+    dst = vocdevkit / 'VOC{year}/ImageSets/Main/{category}_{subset}.txt'
+    annotations = vocdevkit / 'VOC{year}/Annotations/{filename}.xml'
+    imageset = vocdevkit / 'VOC{year}/ImageSets/Main/{subset}.txt'
     template = '{filename} {present}\n'
 
     def f(imageset, annotations, year, dst, template, subset, category):
