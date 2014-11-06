@@ -93,7 +93,7 @@ def create_data(dbpath, subset, devkit, year=2015):
 
     for name, group in iteritems(groupby('file_name', instances)):
         img = imread(images_path / name)
-        if img.ndim == 3:
+        if img.ndim == 3 and img.shape[0] > 10 and img.shape[1] > 10:
             out_name = rename(name)
             annotation = root('VOC2014', '{}.jpg'.format(out_name), 
                               width=group[0]['width'], height=group[0]['height'])
