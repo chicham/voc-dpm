@@ -79,7 +79,7 @@ def mass_rename(src):
 
 
 @baker.command
-def create_data(dbpath, subset, devkit, year=2015):
+def create_data(dbpath, subset, devkit, year=2014):
     annotations_path = path(dbpath).expand() / 'annotations/instances_{}2014.json'.format(subset)
     images_path = path(dbpath).expand() / 'images/{}2014'.format(subset)
     categories , instances= get_instances(annotations_path)
