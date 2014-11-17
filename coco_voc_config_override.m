@@ -17,7 +17,7 @@ function conf = coco_voc_config_override()
 % your project.
 % -------------------------------------------------------
 
-
+conf = voc_config();
 conf.pascal.year = '2014';
 conf.project    = 'cvpr_2015_coco_xp';
 conf.training.train_set_fg = 'train';
