@@ -29,11 +29,11 @@ function coco(n, start, stop)
 startup;
 global VOC_CONFIG_OVERRIDE;
 VOC_CONFIG_OVERRIDE = @coco_voc_config_override;
-testset = conf.eval.test_set;
 load('categories.mat')
 
 for i = start:stop
   conf = voc_config();
+  testset = conf.eval.test_set;
 
   % TODO: should save entire code used for this run
   % Take the code, zip it into an archive named by date
