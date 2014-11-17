@@ -27,12 +27,12 @@ function coco(n, start, stop)
 % -------------------------------------------------------
 
 startup;
+global VOC_CONFIG_OVERRIDE;
+VOC_CONFIG_OVERRIDE = @coco_voc_config_override;
 conf = voc_config();
 cachedir = conf.paths.model_dir;
 testset = conf.eval.test_set;
 load('categories.mat')
-global VOC_CONFIG_OVERRIDE;
-VOC_CONFIG_OVERRIDE = @coco_voc_config_override;
 
 for i = start:stop
 
