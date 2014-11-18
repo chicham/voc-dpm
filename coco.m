@@ -31,7 +31,7 @@ global VOC_CONFIG_OVERRIDE;
 VOC_CONFIG_OVERRIDE = @coco_voc_config_override;
 load('categories.mat')
 
-for i = start:stop
+
   conf = voc_config();
   testset = conf.eval.test_set;
 

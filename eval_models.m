@@ -14,6 +14,7 @@ for i=1:80
   fname = sprintf('%s/%s_final.mat', path, cls)
 
   if exist(fname) > 0
+    load(fname)
     if exist(sprintf('%s/%s/%s/%s_pr_val_2014.mat', conf.paths.base_dir, conf.project, conf.pascal.year, cls)) == 0
       eval_model(cls, model)
     end
